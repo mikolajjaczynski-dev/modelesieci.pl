@@ -18,11 +18,14 @@
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;min-height:100vh}
-main{max-width:960px;margin:0 auto;padding:clamp(16px,4vw,48px) 16px clamp(24px,5vw,56px);display:flex;flex-direction:column;align-items:center;gap:clamp(20px,3.5vw,36px)}
+/* całość mieści się w wysokości okna: wizytówka i animacja skalują się do 100vh */
+:root{--pad:clamp(10px,2vh,20px);--gap:clamp(10px,1.8vh,18px);--lw:min(600px,62vh);--lh:calc(var(--lw)*.3667);--sw:min(900px,max(620px,calc((100vh - var(--lh) - 2*var(--pad) - var(--gap) - 50px)*1.6)))}
+main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-direction:column;align-items:center;gap:var(--gap)}
 
 /* 1. wizytówka (logo poziome / pionowe) */
-.logo{width:100%;max-width:900px;display:block;margin:0}
-.logo svg{display:block;width:100%;height:auto}
+.logo{width:100%;max-width:var(--sw);display:block;margin:0;background:#ffffff}
+.logo svg{display:block;width:100%;max-width:var(--lw);height:auto;margin:0 auto}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo{background:#0f2e44}}
 .l-bg{fill:#ffffff}.l-nm{fill:#0f2e44}.l-tg{fill:#8b5a36}.l-sv{fill:#3c4d59}.l-dash{fill:#2e7d5b}
 .logo svg{--zw:#1d5a85;--zk:#8b5a36;--znw:#0f2e44;--znk:#8b5a36;--zg:#2e7d5b;--zr:#ffffff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo svg{--zw:#6fa8d0;--zk:#c9946a;--znw:#0f2e44;--znk:#c9946a;--zg:#5fbf92;--zr:#ffffff}
@@ -32,7 +35,7 @@ main{max-width:960px;margin:0 auto;padding:clamp(16px,4vw,48px) 16px clamp(24px,
 .l-sv{font-family:var(--font-sans);font-weight:400}
 
 /* 2. animacja */
-.sheet{width:100%;max-width:900px;background:var(--surface);border:1.5px solid var(--ink)}
+.sheet{width:100%;max-width:var(--sw);background:var(--surface);border:1.5px solid var(--ink)}
 #anim{display:block;width:100%;height:auto;cursor:pointer}
 .prog{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;border-top:1px solid var(--line);padding:10px 14px 12px}
 .prog button{position:relative;border:0;background:none;padding:0 0 9px;text-align:left;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
