@@ -187,7 +187,7 @@ function build(mode){
  /* symbole armatury */
  const SY={
   zasuwa:(g,x,y,a)=>{const s=el('g',{transform:`translate(${x} ${y}) rotate(${a})`},g);el('path',{d:'M-5 -3.6L5 3.6V-3.6L-5 3.6Z',fill:'var(--surface)',stroke:'var(--ink)','stroke-width':1.2,'stroke-linejoin':'round'},s);return s},
-  prv:(g,x,y,a)=>{const s=el('g',{transform:`translate(${x} ${y})`},g);el('path',{d:'M-6 -4.4L6 4.4V-4.4L-6 4.4Z',fill:'var(--uwaga)',stroke:'var(--ink)','stroke-width':1.2,transform:`rotate(${a})`},s);el('path',{d:'M-7 7L6 -6M2 -6.5H6.5V-2',fill:'none',stroke:'var(--ink)','stroke-width':1.2},s);return s},
+  prv:(g,x,y,a)=>{const s=el('g',{transform:`translate(${x} ${y})`},g);el('path',{d:'M-6 -4.4L6 4.4V-4.4L-6 4.4Z',fill:'var(--uwaga)',stroke:'var(--ink)','stroke-width':1.2,transform:`rotate(${a})`},s);return s},
   hydrant:(g,x,y)=>{const s=el('g',{transform:`translate(${x} ${y})`},g);el('circle',{r:4.6,fill:'var(--surface)',stroke:'var(--wodociag)','stroke-width':1.6},s);el('path',{d:'M-4.6 0A4.6 4.6 0 0 1 4.6 0Z',fill:'var(--wodociag)'},s);return s},
   pompa:(g,x,y,c='var(--ink)')=>{const s=el('g',{transform:`translate(${x} ${y})`},g);el('circle',{r:7,fill:'var(--surface)',stroke:c,'stroke-width':1.6},s);el('path',{d:'M-3 -4.2L4.6 0L-3 4.2Z',fill:c},s);return s},
   zbiornik:(g,x,y)=>{const s=el('g',{transform:`translate(${x} ${y})`},g);el('path',{d:'M-14 -10H14L11 10H-11Z',fill:'var(--ton)',stroke:'var(--glebia)','stroke-width':1.8},s);el('path',{d:'M-11 -1q3.5 -3 7 0t7 0t7 0',fill:'none',stroke:'var(--wodociag)','stroke-width':1.4},s);el('rect',{x:-11,y:1,width:22,height:7.5,fill:'var(--wodociag)',opacity:.35},s);return s},
@@ -307,7 +307,7 @@ function build(mode){
  tx(ph[4],pw/2,L.p5.my,'SIECI WOD-KAN W PRAKTYCE','a-txb',{'text-anchor':'middle',style:'letter-spacing:.14em'});
  const curtain=el('rect',{x:0,y:0,width:L.vw,height:L.vh,fill:'var(--surface)',opacity:0,'pointer-events':'none'});
 
- render=t=>{
+ render=(t,w=t)=>{
   PH.forEach(([a,b],i)=>ph[i].setAttribute('opacity',Math.min(ramp(t,a+(i?.2:0),a+.9),1-ramp(t,b-.4,b+.2))));
   let built=0,blen=0;
   edges.forEach(e=>{const f=ease(ramp(t,e.t0,e.t0+1.1));e.l.setAttribute('stroke-dashoffset',1-f);blen+=e.len*f;if(f>=1)built++});
@@ -318,8 +318,8 @@ function build(mode){
   let na=0;arm.forEach(a=>{const f=ramp(t,a.t,a.t+.35);a.n.setAttribute('opacity',f);if(f>=1)na++});
   labs.forEach((l,i)=>l.setAttribute('opacity',ramp(t,11.2+i*.3,11.7+i*.3)*(1-.6*ramp(t,30,31))));
   c1[0].textContent=nb;c1[1].textContent=built+Math.round(10*sf);c1[2].textContent=na+wells.filter(w=>+w.getAttribute('opacity')>=1).length;
-  log1.forEach((l,i)=>l.setAttribute('opacity',ramp(t,1.5+i*2.8,2+i*2.8)));
-  lg.setAttribute('opacity',ramp(t,16.5,17.2)*(1-ramp(t,29.5,30.5)));lgR.setAttribute('r',8+3*Math.abs(Math.sin(t*2.2)));
+  log1.forEach((l,i)=>l.setAttribute('opacity',ramp(t,1.5+i*2.6,2+i*2.6)));
+  lg.setAttribute('opacity',ramp(t,16.5,17.2)*(1-ramp(t,29.5,30.5)));lgR.setAttribute('r',8+3*Math.abs(Math.sin(w*2.2)));
   dots.forEach((d,i)=>d.setAttribute('opacity',ramp(t,17+i*.08,17.3+i*.08)));
   const it=cl(Math.floor((t-19.5)/1.65),0,5),itf=ease(ramp((t-19.5)%1.65,0,1.1));
   const A=[1,.7,.48,.3,.15,.05,0],a=t<19.5?1:t>=29.4?0:A[it]+(A[it+1]-A[it])*itf;
@@ -330,12 +330,12 @@ function build(mode){
   bar2.setAttribute('width',L.p2.bar[2]*cl(r2));bar2.setAttribute('fill',r2>.9?'var(--zgodne)':r2>.6?'var(--uwaga)':'var(--niezgodne)');
   const out=1-ramp(t,59,59.5),flow=t>31&&t<59;
   edges.forEach((e,i)=>{e.pl.setAttribute('opacity',ramp(t,30.2+D[e.v]*.25,31+D[e.v]*.25)*out);
-   const fl=flow&&!e.closed;e.dot.setAttribute('opacity',fl?.95:0);if(fl){const q=((t*38/e.len)+i*.37)%1;e.dot.setAttribute('cx',e.x1+(e.x2-e.x1)*q);e.dot.setAttribute('cy',e.y1+(e.y2-e.y1)*q)}});
-  sewDash.setAttribute('opacity',flow?.9:0);sewDash.setAttribute('stroke-dashoffset',-t*14);
+   const fl=flow&&!e.closed;e.dot.setAttribute('opacity',fl?.95:0);if(fl){const q=((w*38/e.len)+i*.37)%1;e.dot.setAttribute('cx',e.x1+(e.x2-e.x1)*q);e.dot.setAttribute('cy',e.y1+(e.y2-e.y1)*q)}});
+  sewDash.setAttribute('opacity',flow?.9:0);sewDash.setAttribute('stroke-dashoffset',-w*14);
   hb.forEach((b,i)=>{const f=ease(ramp(t,31.3+i*.25,32.1+i*.25));b.r.setAttribute('height',b.h*f);b.r.setAttribute('y',g3.base-b.h*f)});
   pTags.forEach((g,i)=>g.setAttribute('opacity',ramp(t,33+i*.5,33.5+i*.5)*(1-ramp(t,41.5,42))));
   k3.forEach((g,i)=>g.setAttribute('opacity',ramp(t,34.5+i*1.5,35.1+i*1.5)));
-  ZN.forEach((g,i)=>g.setAttribute('opacity',ramp(t,14.6+i*.4,15.2+i*.4)*out));
+  ZN.forEach((g,i)=>g.setAttribute('opacity',ramp(t,13.4+i*.4,14+i*.4)*out));
   sew2.setAttribute('stroke-dashoffset',1-ease(ramp(t,12,13)));press2.setAttribute('opacity',ramp(t,13.1,13.5));wells2.forEach((w,i)=>w.setAttribute('opacity',ramp(t,12.1+i*.3,12.4+i*.3)));
 
   let cur4=LOSS[0];mb.forEach((r,i)=>{const f=ease(ramp(t,MT(i),MT(i)+.5)),h=(qy1-QY(LOSS[i]))*f;r.setAttribute('height',h);r.setAttribute('y',qy1-h);if(t>=MT(i)+.25)cur4=LOSS[i]});
@@ -343,7 +343,7 @@ function build(mode){
   sbT1.textContent='sprzedaż '+(100-cur4)+'%';sbT2.textContent='straty '+cur4+'%';
   k4[0].textContent=cur4+' %';k4[1].textContent=fx(cur4*.155,1);k4[2].textContent=fx(.6+(cur4-10)/14*1.2,1)+' l/s';k4[3].textContent=Math.round((24-cur4)*4.52)+' tys. m³/r';
   leaks.forEach((L4,i)=>{L4.g.setAttribute('opacity',ramp(t,42.4+i*.3,42.8+i*.3)*(1-ramp(t,54.6,55.2)));const done=t>=L4.tr;L4.bad.setAttribute('opacity',done?0:1);L4.ok.setAttribute('opacity',done?1:0);
-   L4.r1.setAttribute('r',done?7:7+4*Math.abs(Math.sin(t*3+i)));L4.r1.setAttribute('stroke',done?'var(--zgodne)':'var(--niezgodne)')});
+   L4.r1.setAttribute('r',done?7:7+4*Math.abs(Math.sin(w*3+i)));L4.r1.setAttribute('stroke',done?'var(--zgodne)':'var(--niezgodne)')});
   curtain.setAttribute('opacity',Math.max(1-ramp(t,0,.6),ramp(t,58.9,59.5)));
  };
 }
@@ -373,13 +373,16 @@ document.getElementById('down').addEventListener('click',()=>go(0));
 const initMode=()=>{clearTimeout(auto);cur=-2;if(!MOB.matches){end=T;play=!reduce&&!hm;last=null}};
 MOB.addEventListener('change',initMode);initMode();
 
-tabs.forEach((b,i)=>b.addEventListener('click',()=>{if(MOB.matches){go(i);return}t=+b.dataset.t+.01;render(t);ui(t)}));
+tabs.forEach((b,i)=>b.addEventListener('click',()=>{if(MOB.matches){go(i);return}hold=0;t=+b.dataset.t+.01;render(t);ui(t)}));
 S.addEventListener('click',()=>{if(MOB.matches)return;play=!play;last=null});
+/* komputer: 1 s pauzy na końcu każdego etapu (etap jeszcze w pełni widoczny) */
+const HOLDS=[15.6,29.4,41.5,54.6],SPD=1.25;let hold=0,amb=0;
 function loop(ts){
- if(play){if(last!==null)t+=Math.min(.1,(ts-last)/1000);last=ts;
-  if(MOB.matches){if(t>=end){t=end;play=false;if(cur>=0&&cur<3)arm(cur+1,1800)}}
-  else if(t>=T)t=0;
-  render(t);ui(t)}else last=null;
+ if(play){const rt=last!==null?Math.min(.1,(ts-last)/1000):0,dt=rt*SPD;last=ts;amb+=dt;
+  if(MOB.matches){t+=dt;if(t>=end){t=end;play=false;if(cur>=0&&cur<3)arm(cur+1,1000)}}
+  else if(hold>0)hold-=rt;
+  else{const tn=t+dt,h=HOLDS.find(x=>t<x&&tn>=x);if(h!==undefined){t=h;hold=1}else t=tn>=T?0:tn}
+  render(t,amb);ui(t)}else last=null;
  requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 })();
