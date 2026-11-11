@@ -23,7 +23,12 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);-webk
 main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-direction:column;align-items:center;gap:var(--gap)}
 
 /* 1. wizytówka (logo poziome / pionowe) */
-.logo{width:100%;max-width:var(--sw);display:block;margin:0;background:#ffffff}
+.logo{position:relative;width:100%;max-width:var(--sw);display:block;margin:0;background:#ffffff}
+.li{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:32px;height:32px;border-radius:4px;color:#0f2e44;opacity:.75;transition:opacity .2s,color .2s}
+.li svg{width:22px;height:22px;fill:currentColor}
+.li:hover,.li:focus-visible{opacity:1;color:#0a66c2}
+.li:focus-visible{outline:2px solid var(--wodociag);outline-offset:2px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .li{color:#ffffff}}
 .logo svg{display:block;width:100%;max-width:var(--lw);height:auto;margin:0 auto}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo{background:#0f2e44}}
 .l-bg{fill:#ffffff}.l-nm{fill:#0f2e44}.l-tg{fill:#8b5a36}.l-sv{fill:#3c4d59}.l-dash{fill:#2e7d5b}
@@ -81,6 +86,8 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
  .step{height:100vh;height:100svh;scroll-snap-align:start}
  .prog button{font-size:9.5px}
  .prog .lg{display:none}
+ .li{top:4px;right:4px;width:24px;height:24px}
+ .li svg{width:16px;height:16px}
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){.down{animation:none}}
 @media (prefers-reduced-motion:reduce){.wip i,.wip span::after{animation:none}.wip span::after{width:1.05ch}}
@@ -112,6 +119,7 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
       <rect class="l-dash" x="302" y="254" width="44" height="5"/>
       <text class="l-sv" x="362" y="262" font-size="19">modelowanie · analizy · strefowanie · doradztwo</text>
     </svg>
+    <a class="li" href="https://www.linkedin.com/in/mikolajjaczynski" target="_blank" rel="noopener" aria-label="Profil LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
   </h1>
   <button class="down" id="down" type="button" aria-label="Przewiń do animacji"><svg viewBox="0 0 24 24"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </section>
