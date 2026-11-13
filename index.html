@@ -23,23 +23,21 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);-webk
 :root{--pad:clamp(10px,2vh,20px);--gap:clamp(10px,1.8vh,18px);--lw:min(600px,62vh);--lh:calc(var(--lw)*.3667);--sw:min(900px,max(620px,calc((100vh - var(--lh) - 2*var(--pad) - var(--gap) - 50px)*1.6)))}
 main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-direction:column;align-items:center;gap:var(--gap)}
 
-/* 1. wizytówka (logo poziome / pionowe) */
-.logo{position:relative;width:100%;max-width:var(--sw);display:block;margin:0;background:#ffffff}
-.li{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:32px;height:32px;border-radius:4px;color:#0f2e44;opacity:.75;transition:opacity .2s,color .2s}
+/* 1. baner (jak tło profilu LinkedIn): zawsze ciemny, sieć w tle */
+.logo{position:relative;width:100%;max-width:var(--sw);display:block;margin:0;color:#fff;
+ background:linear-gradient(90deg,rgba(15,46,68,.25),rgba(15,46,68,.7) 40%,#0f2e44 62%),#0f2e44 url(siec-tlo.webp) left center/auto 100% no-repeat}
+.li{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:32px;height:32px;border-radius:4px;color:#ffffff;opacity:.8;transition:opacity .2s,background .2s}
 .li svg{width:22px;height:22px;fill:currentColor}
-.li:hover,.li:focus-visible{opacity:1;color:#0a66c2}
-.li:focus-visible{outline:2px solid var(--wodociag);outline-offset:2px}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .li{color:#ffffff}}
-.logo svg{display:block;width:100%;max-width:var(--lw);height:auto;margin:0 auto}
+.li:hover,.li:focus-visible{opacity:1;background:#0a66c2}
+.li:focus-visible{outline:2px solid #6fa8d0;outline-offset:2px}
+.logo svg{display:block;width:100%;height:auto;max-height:var(--lh);margin:0 auto}
 .logo svg.v{display:none}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo{background:#0f2e44}}
-.l-bg{fill:#ffffff}.l-nm{fill:#0f2e44}.l-tg{fill:#8b5a36}.l-sv{fill:#3c4d59}.l-dash{fill:#2e7d5b}
-.logo svg{--zw:#1d5a85;--zk:#8b5a36;--znw:#0f2e44;--znk:#8b5a36;--zg:#2e7d5b;--zr:#ffffff}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo svg{--zw:#6fa8d0;--zk:#c9946a;--znw:#0f2e44;--znk:#c9946a;--zg:#5fbf92;--zr:#ffffff}
- :root:not([data-theme="light"]) .l-bg{fill:#0f2e44}:root:not([data-theme="light"]) .l-nm{fill:#ffffff}:root:not([data-theme="light"]) .l-tg{fill:#6fa8d0}:root:not([data-theme="light"]) .l-sv{fill:#c9d6df}:root:not([data-theme="light"]) .l-dash{fill:#5fbf92}}
-.l-nm{font-family:var(--font-display);font-weight:600}
-.l-tg{font-family:var(--font-sans);font-weight:600;letter-spacing:.16em}
-.l-sv{font-family:var(--font-sans);font-weight:400}
+.logo svg{--zw:#6fa8d0;--zk:#c9946a;--znw:#0f2e44;--znk:#8b5a36;--zg:#2e7d5b;--zr:#ffffff}
+.l-nm{fill:#ffffff;font-family:var(--font-display);font-weight:600}
+.l-tg{fill:#6fa8d0;font-family:var(--font-sans);font-weight:600;letter-spacing:.16em}
+.l-sv{fill:#c9d6df;font-family:var(--font-sans);font-weight:400}
+.l-tech{fill:#8ea3b2;font-family:var(--font-mono);letter-spacing:.12em}
+.l-dash{fill:#5fbf92}
 
 /* 2. animacja */
 .sheet{width:100%;max-width:var(--sw);background:var(--surface);border:1.5px solid var(--ink)}
@@ -50,13 +48,6 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
 .prog u{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--wodociag)}
 .prog button.on{color:var(--ink)}
 .prog button:focus-visible{outline:2px solid var(--wodociag);outline-offset:3px}
-
-/* 3. napis */
-.wip{display:flex;align-items:center;gap:14px;font-family:var(--font-display);font-weight:600;font-size:clamp(26px,4.4vw,40px);line-height:1.1;letter-spacing:.01em;margin:0;text-align:center}
-.wip i{width:12px;height:12px;border-radius:50%;background:var(--uwaga);flex:none;animation:ping 2.4s infinite}
-.wip span::after{content:"…";display:inline-block;overflow:hidden;vertical-align:bottom;width:0;animation:dots 1.8s steps(4) infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--uwaga) 55%,transparent)}70%,100%{box-shadow:0 0 0 12px transparent}}
-@keyframes dots{to{width:1.05ch}}
 
 /* SVG animacji */
 .a-grid{stroke:var(--line);stroke-width:.6}
@@ -77,10 +68,12 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
 @media (max-width:600px){
  html{scroll-snap-type:y mandatory}
  main{padding:0;gap:0}
- .hero{height:100vh;height:100svh;justify-content:space-between;gap:16px;padding:16px 16px 20px;scroll-snap-align:start}
- .logo{flex:1 1 auto;min-height:0;max-width:none;display:flex;align-items:center;justify-content:center;padding:12px}
+ .hero{height:100vh;height:100svh;justify-content:space-between;gap:16px;padding:16px 16px 20px;scroll-snap-align:start;
+  background:linear-gradient(180deg,rgba(15,46,68,.55),rgba(15,46,68,.85) 55%,#0f2e44),#0f2e44 url(siec-tlo.webp) center/cover no-repeat}
+ .logo{flex:1 1 auto;min-height:0;max-width:none;display:flex;align-items:center;justify-content:center;padding:12px;background:none}
  .logo svg.h{display:none}
  .logo svg.v{display:block;width:100%;height:100%;max-width:none;max-height:100%}
+ .down{border-color:rgba(255,255,255,.45)!important;background:transparent!important;color:#ffffff!important}
  .down{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;animation:bob 1.8s ease-in-out infinite}
  .down svg{width:24px;height:24px}
  @keyframes bob{50%{transform:translateY(8px)}}
@@ -95,7 +88,6 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
  .li svg{width:48px;height:48px}
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){.down{animation:none}}
-@media (prefers-reduced-motion:reduce){.wip i,.wip span::after{animation:none}.wip span::after{width:1.05ch}}
 </style>
 </head>
 <body>
@@ -115,23 +107,23 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
 
 <main>
   <section class="hero">
-  <h1 class="logo" aria-label="Mikołaj Jaczyński — Sieci wod-kan w praktyce. Modelowanie, analizy, strefowanie, doradztwo">
-    <svg class="h" viewBox="0 0 900 330" aria-hidden="true">
-      <rect class="l-bg" width="900" height="330"/>
-      <use href="#syg" x="44" y="30" width="222" height="270"/>
-      <text class="l-nm" x="300" y="168" font-size="66">Mikołaj Jaczyński</text>
-      <text class="l-tg" x="302" y="219" font-size="20">SIECI WOD-KAN W PRAKTYCE</text>
-      <rect class="l-dash" x="302" y="254" width="44" height="5"/>
-      <text class="l-sv" x="362" y="262" font-size="19">modelowanie · analizy · strefowanie · doradztwo</text>
+  <h1 class="logo" aria-label="Mikołaj Jaczyński — Sieci wod-kan w praktyce. Modele i analizy, które usprawniają pracę przedsiębiorstwa. EPANET, SWMM, GIS, Python, AI">
+    <svg class="h" viewBox="0 0 900 300" aria-hidden="true">
+      <use href="#syg" x="40" y="40" width="180" height="219"/>
+      <text class="l-nm" x="260" y="128" font-size="60">Mikołaj Jaczyński</text>
+      <text class="l-tg" x="263" y="172" font-size="19">SIECI WOD-KAN W PRAKTYCE</text>
+      <rect class="l-dash" x="263" y="201" width="40" height="5"/>
+      <text class="l-sv" x="318" y="208" font-size="17">modele i analizy, które usprawniają pracę przedsiębiorstwa</text>
+      <text class="l-tech" x="263" y="250" font-size="13">EPANET · SWMM · GIS · PYTHON · AI</text>
     </svg>
-    <svg class="v" viewBox="0 0 360 560" aria-hidden="true">
-      <rect class="l-bg" width="360" height="560"/>
-      <use href="#syg" x="60" y="10" width="240" height="292"/>
-      <text class="l-nm" x="180" y="372" font-size="38" text-anchor="middle">Mikołaj Jaczyński</text>
-      <text class="l-tg" x="180" y="410" font-size="14.5" text-anchor="middle">SIECI WOD-KAN W PRAKTYCE</text>
-      <rect class="l-dash" x="158" y="436" width="44" height="5"/>
-      <text class="l-sv" x="180" y="478" font-size="17" text-anchor="middle">modelowanie · analizy</text>
-      <text class="l-sv" x="180" y="504" font-size="17" text-anchor="middle">strefowanie · doradztwo</text>
+    <svg class="v" viewBox="0 0 360 590" aria-hidden="true">
+      <use href="#syg" x="65" y="10" width="230" height="280"/>
+      <text class="l-nm" x="180" y="352" font-size="37" text-anchor="middle">Mikołaj Jaczyński</text>
+      <text class="l-tg" x="180" y="390" font-size="14.5" text-anchor="middle">SIECI WOD-KAN W PRAKTYCE</text>
+      <rect class="l-dash" x="160" y="414" width="40" height="5"/>
+      <text class="l-sv" x="180" y="456" font-size="17" text-anchor="middle">modele i analizy, które usprawniają</text>
+      <text class="l-sv" x="180" y="480" font-size="17" text-anchor="middle">pracę przedsiębiorstwa</text>
+      <text class="l-tech" x="180" y="530" font-size="12" text-anchor="middle">EPANET · SWMM · GIS · PYTHON · AI</text>
     </svg>
     <a class="li" href="https://www.linkedin.com/in/mikolajjaczynski" target="_blank" rel="noopener" aria-label="Profil LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
   </h1>
