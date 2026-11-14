@@ -105,9 +105,7 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
  .sheet .foot{flex:0 0 auto;max-width:none;margin:0;padding:0 14px;height:0;overflow:hidden;opacity:0;transition:height .3s,opacity .3s}
  .sheet.last .foot{height:44px;opacity:1;overflow:visible}
  .sheet .foot details{height:100%;display:flex;align-items:center}
- .sheet .foot summary{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);font-size:11.5px}
- .sheet .foot summary::before{content:"+";font-size:14px;line-height:1}
- .sheet .foot details[open] summary::before{content:"−"}
+ .sheet .foot summary{padding:10px 0;font-size:11.5px}
  .sheet .foot .txt{position:absolute;left:12px;right:12px;bottom:52px;max-height:calc(100svh - 80px);overflow:auto;margin:0;padding:14px 16px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:2}
 }
 
@@ -169,7 +167,7 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
 
 <footer class="foot">
   <details>
-    <summary>Prywatność</summary>
+    <summary>Polityka prywatności</summary>
     <div class="txt">
       <p><strong>Administrator:</strong> Mikołaj Jaczyński. Kontakt w sprawach danych osobowych: przez <a href="https://www.linkedin.com/in/mikolajjaczynski" target="_blank" rel="noopener">profil LinkedIn</a>.</p>
       <p><strong>Co zbiera ta strona:</strong> nic. Nie używa ciasteczek, analityki, narzędzi śledzących ani formularzy. Czcionki i grafiki są wczytywane z tego samego serwera, bez połączeń z usługami firm trzecich.</p>
