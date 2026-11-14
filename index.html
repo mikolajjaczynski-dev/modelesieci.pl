@@ -101,10 +101,14 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
 .foot p{margin:0 0 8px}.foot p:last-child{margin:0}
 .foot a{color:var(--wodociag)}
 @media (max-width:600px){
- /* telefon: osobny, ostatni ekran przewijania, tekst od razu rozwinięty */
- .foot{margin:0;padding:28px 16px 32px;scroll-snap-align:start;border-top:1px solid var(--line)}
- .foot summary{pointer-events:none;font-size:12px;color:var(--ink)}
- .foot summary::before,.foot details[open] summary::before{content:none}
+ /* telefon: stopka przeniesiona (JS) do arkusza animacji; przycisk widoczny tylko na ostatnim etapie */
+ .sheet .foot{flex:0 0 auto;max-width:none;margin:0;padding:0 14px;height:0;overflow:hidden;opacity:0;transition:height .3s,opacity .3s}
+ .sheet.last .foot{height:44px;opacity:1;overflow:visible}
+ .sheet .foot details{height:100%;display:flex;align-items:center}
+ .sheet .foot summary{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);font-size:11.5px}
+ .sheet .foot summary::before{content:"+";font-size:14px;line-height:1}
+ .sheet .foot details[open] summary::before{content:"−"}
+ .sheet .foot .txt{position:absolute;left:12px;right:12px;bottom:52px;max-height:calc(100svh - 80px);overflow:auto;margin:0;padding:14px 16px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:2}
 }
 
 </style>
@@ -414,6 +418,7 @@ const ENDS=[PH[0][1]-.5,PH[1][1]-.5,PH[2][1]-.5,58.6];
 const go=i=>{const el=i<0?hero:steps[i];if(el)el.scrollIntoView({behavior:reduce?'auto':'smooth'})};
 const arm=(i,ms)=>{clearTimeout(auto);auto=setTimeout(()=>{if(MOB.matches)go(i)},ms)};
 function setPhase(i){if(i===cur)return;cur=i;clearTimeout(auto);last=null;
+ sheet.classList.toggle('last',i===3);if(i!==3)pd.open=false;
  if(i<0){t=.7;play=false;render(t);ui(t);arm(0,6000);return}
  t=PH[i][0]+.01;end=ENDS[i];play=true;render(t);ui(t)}
 const io=new IntersectionObserver(es=>{if(!MOB.matches||hm)return;es.forEach(e=>{if(e.isIntersecting){setPhase(e.target===hero?-1:steps.indexOf(e.target))}})},{threshold:.6});
@@ -421,8 +426,10 @@ const io=new IntersectionObserver(es=>{if(!MOB.matches||hm)return;es.forEach(e=>
 document.getElementById('down').addEventListener('click',()=>go(0));
 const initMode=()=>{clearTimeout(auto);cur=-2;if(!MOB.matches){end=T;play=!reduce&&!hm;last=null}};
 MOB.addEventListener('change',initMode);initMode();
-/* telefon: notka o prywatności zawsze rozwinięta */
-const pd=document.querySelector('.foot details'),pOpen=()=>{if(MOB.matches)pd.open=true};MOB.addEventListener('change',pOpen);pOpen();
+/* notka o prywatności: na telefonie w arkuszu animacji pod ostatnim etapem, na komputerze pod animacją */
+const foot=document.querySelector('.foot'),pd=foot.querySelector('details'),sheet=document.querySelector('.sheet'),mainEl=document.querySelector('main');
+const placeFoot=()=>{if(MOB.matches){sheet.appendChild(foot)}else{mainEl.after(foot);sheet.classList.remove('last')}};
+MOB.addEventListener('change',placeFoot);placeFoot();
 
 tabs.forEach((b,i)=>b.addEventListener('click',()=>{if(MOB.matches){go(i);return}hold=0;t=+b.dataset.t+.01;render(t);ui(t)}));
 S.addEventListener('click',()=>{if(MOB.matches)return;play=!play;last=null});
