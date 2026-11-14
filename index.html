@@ -21,7 +21,7 @@
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;min-height:100vh}
 /* całość mieści się w wysokości okna: wizytówka i animacja skalują się do 100vh */
-:root{--pad:clamp(10px,2vh,20px);--gap:clamp(10px,1.8vh,18px);--lw:min(600px,62vh);--lh:calc(var(--lw)*.3667);--sw:min(900px,max(620px,calc((100vh - var(--lh) - 2*var(--pad) - var(--gap) - 50px)*1.6)))}
+:root{--pad:clamp(10px,2vh,20px);--gap:clamp(10px,1.8vh,18px);--lw:min(600px,62vh);--lh:calc(var(--lw)*.3667);--sw:min(900px,max(620px,calc((100vh - var(--lh) - 2*var(--pad) - var(--gap) - 50px - 26px)*1.6)))}
 main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-direction:column;align-items:center;gap:var(--gap)}
 
 /* 1. baner (jak tło profilu LinkedIn): zawsze ciemny, sieć w tle */
@@ -89,6 +89,19 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
  .li svg{width:48px;height:48px}
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){.down{animation:none}}
+/* 3. stopka: notka o prywatności */
+.foot{width:100%;max-width:var(--sw);margin:calc(-1*var(--gap)/2) auto 0;padding:0 16px var(--pad);font-size:12px;line-height:1.55;color:var(--muted)}
+.foot summary{cursor:pointer;width:max-content;font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;list-style:none}
+.foot summary::-webkit-details-marker{display:none}
+.foot summary::before{content:"+ ";}
+.foot details[open] summary::before{content:"− "}
+.foot summary:hover,.foot summary:focus-visible{color:var(--ink)}
+.foot summary:focus-visible{outline:2px solid var(--wodociag);outline-offset:3px}
+.foot .txt{margin-top:8px;padding:12px 14px;background:var(--surface);border:1px solid var(--line)}
+.foot p{margin:0 0 8px}.foot p:last-child{margin:0}
+.foot a{color:var(--wodociag)}
+@media (max-width:600px){.foot{margin:0;padding:14px 16px 20px;scroll-snap-align:end}}
+
 </style>
 </head>
 <body>
@@ -144,6 +157,19 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
   <div class="steps" aria-hidden="true"><div class="step"></div><div class="step"></div><div class="step"></div><div class="step"></div></div>
   </section>
 </main>
+
+<footer class="foot">
+  <details>
+    <summary>Prywatność</summary>
+    <div class="txt">
+      <p><strong>Administrator:</strong> Mikołaj Jaczyński. Kontakt w sprawach danych osobowych: przez <a href="https://www.linkedin.com/in/mikolajjaczynski" target="_blank" rel="noopener">profil LinkedIn</a>.</p>
+      <p><strong>Co zbiera ta strona:</strong> nic. Nie używa ciasteczek, analityki, narzędzi śledzących ani formularzy. Czcionki i grafiki są wczytywane z tego samego serwera, bez połączeń z usługami firm trzecich.</p>
+      <p><strong>Hosting:</strong> stronę udostępnia GitHub Pages (GitHub, Inc.). Przy każdym wejściu serwer GitHub może zapisywać w logach adres IP odwiedzającego, w celu zapewnienia bezpieczeństwa i działania usługi (art. 6 ust. 1 lit. f RODO). Szczegóły: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">oświadczenie o prywatności GitHub</a>.</p>
+      <p><strong>Linki zewnętrzne:</strong> po kliknięciu odnośnika do LinkedIn obowiązują zasady prywatności tego serwisu.</p>
+      <p><strong>Twoje prawa:</strong> dostęp do danych, ich sprostowanie, usunięcie, ograniczenie przetwarzania, sprzeciw oraz skarga do Prezesa Urzędu Ochrony Danych Osobowych.</p>
+    </div>
+  </details>
+</footer>
 
 <script>
 (()=>{
