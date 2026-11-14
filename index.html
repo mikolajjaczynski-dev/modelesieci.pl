@@ -100,7 +100,12 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
 .foot .txt{margin-top:8px;padding:12px 14px;background:var(--surface);border:1px solid var(--line)}
 .foot p{margin:0 0 8px}.foot p:last-child{margin:0}
 .foot a{color:var(--wodociag)}
-@media (max-width:600px){.foot{margin:0;padding:14px 16px 20px;scroll-snap-align:end}}
+@media (max-width:600px){
+ /* telefon: osobny, ostatni ekran przewijania, tekst od razu rozwinięty */
+ .foot{margin:0;padding:28px 16px 32px;scroll-snap-align:start;border-top:1px solid var(--line)}
+ .foot summary{pointer-events:none;font-size:12px;color:var(--ink)}
+ .foot summary::before,.foot details[open] summary::before{content:none}
+}
 
 </style>
 </head>
@@ -416,6 +421,8 @@ const io=new IntersectionObserver(es=>{if(!MOB.matches||hm)return;es.forEach(e=>
 document.getElementById('down').addEventListener('click',()=>go(0));
 const initMode=()=>{clearTimeout(auto);cur=-2;if(!MOB.matches){end=T;play=!reduce&&!hm;last=null}};
 MOB.addEventListener('change',initMode);initMode();
+/* telefon: notka o prywatności zawsze rozwinięta */
+const pd=document.querySelector('.foot details'),pOpen=()=>{if(MOB.matches)pd.open=true};MOB.addEventListener('change',pOpen);pOpen();
 
 tabs.forEach((b,i)=>b.addEventListener('click',()=>{if(MOB.matches){go(i);return}hold=0;t=+b.dataset.t+.01;render(t);ui(t)}));
 S.addEventListener('click',()=>{if(MOB.matches)return;play=!play;last=null});
