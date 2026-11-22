@@ -423,7 +423,7 @@ const go=i=>{const el=i<0?hero:steps[i];if(el)el.scrollIntoView({behavior:reduce
 const arm=(i,ms)=>{clearTimeout(auto);auto=setTimeout(()=>{if(MOB.matches)go(i)},ms)};
 function setPhase(i){if(i===cur)return;cur=i;clearTimeout(auto);last=null;
  sheet.classList.toggle('last',i===3);if(i!==3)pd.open=false;
- if(i<0){t=.7;play=false;render(t);ui(t);arm(0,6000);return}
+ if(i<0){t=.7;play=false;render(t);ui(t);return}
  t=PH[i][0]+.01;end=ENDS[i];play=true;render(t);ui(t)}
 const io=new IntersectionObserver(es=>{if(!MOB.matches||hm)return;es.forEach(e=>{if(e.isIntersecting){setPhase(e.target===hero?-1:steps.indexOf(e.target))}})},{threshold:.6});
 [hero,...steps].forEach(e=>io.observe(e));
