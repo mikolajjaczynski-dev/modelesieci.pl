@@ -13,6 +13,8 @@ repozytorium `mikolajjaczynski-dev/jaczynski.com.pl`).
   logo (duży sygnet, pod nim nazwisko, „SIECI WOD-KAN W PRAKTYCE”, usługi w dwóch
   liniach) i strzałka w dół. Dalej animacja przewijana krokami.
 - Ikona LinkedIn w prawym górnym rogu logo: 32 px na komputerze, 72 px na telefonie.
+- Link „BLOG” do https://praktykasieci.pl/: na komputerze w banerze obok ikony LinkedIn (15 px),
+  na telefonie w lewym górnym rogu pierwszego ekranu, na wysokości ikony LinkedIn (20 px).
 
 ## Google
 

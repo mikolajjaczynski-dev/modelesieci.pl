@@ -31,6 +31,10 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
 .li svg{width:22px;height:22px;fill:currentColor}
 .li:hover,.li:focus-visible{opacity:1;background:#0a66c2}
 .li:focus-visible{outline:2px solid #6fa8d0;outline-offset:2px}
+/* link do bloga praktykasieci.pl: na komputerze obok LinkedIn, na telefonie w lewym górnym rogu */
+.blog{position:absolute;top:10px;right:50px;height:32px;display:flex;align-items:center;padding:0 10px;border-radius:4px;color:#fff;opacity:.85;font-family:var(--font-mono);font-size:15px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:opacity .2s,background .2s}
+.blog:hover,.blog:focus-visible{opacity:1;background:rgba(255,255,255,.12)}
+.blog:focus-visible{outline:2px solid #6fa8d0;outline-offset:2px}
 .logo svg{display:block;width:100%;height:auto;max-height:var(--lh);margin:0 auto}
 .logo svg.v{display:none}
 .logo svg{--zw:#6fa8d0;--zk:#c9946a;--znw:#0f2e44;--znk:#8b5a36;--zg:#2e7d5b;--zr:#ffffff}
@@ -87,6 +91,7 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
  .prog .lg{display:none}
  .li{top:4px;right:4px;width:72px;height:72px;border-radius:8px}
  .li svg{width:48px;height:48px}
+ .blog{top:4px;left:4px;right:auto;height:72px;padding:0 14px;border-radius:8px;font-size:20px}
 }
 @media (max-width:600px) and (prefers-reduced-motion:reduce){.down{animation:none}}
 /* 3. stopka: notka o prywatności */
@@ -146,6 +151,7 @@ main{max-width:960px;margin:0 auto;padding:var(--pad) 16px;display:flex;flex-dir
       <text class="l-sv" x="180" y="480" font-size="17" text-anchor="middle">pracę przedsiębiorstwa</text>
       <text class="l-tech" x="180" y="530" font-size="12" text-anchor="middle">EPANET · SWMM · GIS · PYTHON · AI</text>
     </svg>
+    <a class="blog" href="https://praktykasieci.pl/">blog</a>
     <a class="li" href="https://www.linkedin.com/in/mikolajjaczynski" target="_blank" rel="noopener" aria-label="Profil LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
   </h1>
   <button class="down" id="down" type="button" aria-label="Przewiń do animacji"><svg viewBox="0 0 24 24"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
